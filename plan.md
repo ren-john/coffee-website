@@ -397,3 +397,13 @@ Build/type checking and all 15 tests pass. New tests check projected packaging c
 ## 19. Final product composition correction
 
 The ending now pulls back from the pour to show the entire packaging and cup together. This supersedes the cropped final cup framing in section 18. The settled products' combined world bounds include the cup handle and saucer; a perspective fit accounts for object depth, camera tilt and viewport aspect ratio, leaving a margin around the pair. Earlier close-up reveals remain intact. Build and all 19 tests pass, including projected final bounds at four desktop/tablet/mobile aspect ratios. Browser visual verification remains pending.
+
+## 20. White reference sequence — October 20, 2026
+
+The four images in `sequence/` now guide the opening layout: white background, burgundy typography at left, package at right tipping toward the grinder. The package's original cream/burgundy materials remain intact. Later pouring/final scenes retain centered text and the complete final product pair.
+
+The grinder is in place and its lid is clear before beans arrive. Travelling beans land inside the hopper; a lightweight 720-bean pile builds in layers without stretching the beans. Filling ends at progress .385, the camera holds on the hopper through .435, grinding starts at .455, and the filled portafilter transfers at .525. This separates filling, a full-pile pause, the downward camera move, and dosing.
+
+The coffee stream uses a segmented deforming mesh, varying width and small lateral motion. Extraction begins/ends with drops and periodically breaks into drops during the main pour. Drops accelerate toward the coffee surface, which has edge-damped waves and expanding ripples. Effects turn off when seeking outside extraction; reduced motion still uses the static story.
+
+Automated camera/state/liquid tests cover filling before grinding, the hopper camera hold, stream/drop transitions and shutoff, plus the previous model/finale contracts. Actual rendered visual review and real-device performance measurements remain pending under the documented browser preview restriction.

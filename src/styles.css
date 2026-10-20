@@ -8,35 +8,39 @@
 @media(max-width:600px){.site-header{padding:21px 6%;height:85px}.brand{font-size:26px;gap:7px}.brand svg{width:23px;height:30px}.brand-caption{font-size:6px;letter-spacing:1.8px;margin-top:6px}.site-header nav{gap:18px;font-size:12px}.nav-story,.bag-label{display:none}.bag-button{gap:6px}.story{height:620vh}.story-stage{min-height:620px}.story-copy{top:15%;left:7%;width:86%;height:34%}.chapter h1,.chapter h2,.chapter.finale h2{font-size:clamp(43px,11.6vw,66px);letter-spacing:-1.8px;line-height:1;margin-top:16px}.chapter-description{font-size:13px;line-height:1.5;margin-top:13px}.chapter-description br{display:none}.eyebrow{font-size:8px;letter-spacing:1.5px;gap:8px}.little-line{width:17px}.begin-story{font-size:11px;margin-top:15px;padding-bottom:5px;gap:25px}.text-link span{font-size:15px}.scene-poster{right:9%;top:42%;width:82%;height:48%}.scene-loading{right:auto;left:50%;transform:translateX(-50%);bottom:13%;white-space:nowrap;font-size:10px}.retry-scene{right:42%;bottom:10%}.object-note{display:none}.chapter .primary-button{margin-top:17px;padding:12px 19px;font-size:12px;min-width:155px;gap:35px}.story-bottom{left:7%;right:7%;bottom:18px}.scroll-hint{font-size:7px;letter-spacing:1px;gap:7px}.scroll-track{display:none}.chapters-nav{gap:4px}.chapters-nav button{width:24px;height:26px;font-size:8px}.story-index{display:none}.watermark{font-size:80px;top:63%;right:-20px}.stage-halo{width:110vw;height:110vw;right:-25%;top:38%}.shop-section{padding:65px 6% 30px}.shop-intro{display:block;margin-bottom:35px}.shop-intro h2{font-size:53px;letter-spacing:-2px;margin-top:20px}.shop-intro>p{font-size:13px;margin-top:20px}.product-grid{gap:14px}.product-visual{height:225px}.coffee-pouch{transform:rotate(-7deg) scale(.78)}.product-card:nth-child(even) .coffee-pouch{transform:rotate(6deg) scale(.78)}.product-card:hover .coffee-pouch{transform:rotate(0) scale(.78)}.product-visual:after{width:80px;bottom:19px}.roast-tag{font-size:7px;left:10px;top:11px}.product-meta{font-size:7px;letter-spacing:.7px;padding-top:15px;gap:5px}.product-card h3{font-size:22px}.tasting-notes{font-size:11px;min-height:48px}.product-options{flex-direction:column;margin-top:12px;gap:6px}.product-options select{font-size:11px;padding:4px 0}.product-options label>span{font-size:8px}.product-price{font-size:17px}.add-to-bag{font-size:10px;gap:6px}.catalog-note{margin-top:15px;text-align:left}.closing-note{padding:65px 20px}.closing-note p{font-size:49px}footer{flex-wrap:wrap;gap:20px;padding:25px 6%}footer>span:last-child{width:100%;font-size:10px}.ritual-stills{grid-template-columns:repeat(2,1fr);gap:22px}.reduced-story{padding-top:125px}.toast{width:85%;text-align:center}.cart-header .eyebrow{font-size:9px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.story{display:none}.reduced-story{display:block!important}}
 
-/* Deep burgundy page backdrop; cream product packaging keeps its original palette. */
+/* White canvas, retaining the cream packaging and burgundy brand palette. */
 :root {
-  --background: #2D0000;
-  --muted: #cdb4a5;
-  --line: #fff9ef29;
-  color: var(--cream);
+  --background: #ffffff;
+  --muted: #76655e;
+  --line: #48081726;
+  color: var(--wine);
   background: var(--background);
-  color-scheme: dark;
+  color-scheme: light;
 }
 body, .story-stage, .shop-section, .closing-note, .reduced-story, footer {
   background: var(--background);
 }
-.stage-halo { background: radial-gradient(ellipse, #651f2b55, transparent 68%); }
-.watermark { color: #fff9ef08; }
-.chapter h1 em, .chapter h2 em { color: #e5b7a5; }
+.stage-halo, .stage-grain { display: none; }
+.watermark { color: #48081708; }
+.chapter h1 em, .chapter h2 em { color: #782e39; }
 .chapter-description, .object-note, .shop-intro > p, .product-meta,
 .tasting-notes, .product-options label > span, .catalog-note,
 .reduced-story > p, footer { color: var(--muted); }
-.footer-brand, .product-options select { color: var(--cream); }
-.product-options option { background: var(--background); color: var(--cream); }
+.footer-brand, .product-options select { color: var(--wine); }
+.product-options option { background: var(--background); color: var(--wine); }
 .site-header nav a:after, .loading-dot, .little-line,
-.scroll-track:after, #story-progress { background: var(--cream); }
-.text-link, .retry-scene, .add-to-bag, .scroll-track { border-color: #fff9ef66; }
+.scroll-track:after, #story-progress { background: var(--wine); }
+.text-link, .retry-scene, .add-to-bag, .scroll-track { border-color: #48081766; }
 .chapters-nav button { border-top-color: var(--line); }
-.chapters-nav button.is-current { color: var(--cream); border-top-color: var(--cream); }
+.chapters-nav button { color: #806660; }
+.chapters-nav button.is-current { color: var(--wine); border-top-color: var(--wine); }
 .story-progress { background: var(--line); }
-.primary-button, .skip-link, .toast { background: var(--cream); color: var(--wine); }
-.primary-button:hover { background: #e5b7a5; }
-a:focus-visible, button:focus-visible, select:focus-visible { outline-color: #e5b7a5; }
+.primary-button, .skip-link, .toast { background: var(--wine); color: var(--cream); }
+.primary-button:hover { background: #782e39; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline-color: #964550; }
+.closing-note { color: var(--wine); }
+.closing-note .eyebrow { color: var(--muted); }
+.closing-note .text-link { border-color: #48081766; }
 .scene-poster, .ritual-stills img { mix-blend-mode: normal; }
 .product-visual { color: var(--wine); color-scheme: light; }
 dialog { --line: #48081726; color-scheme: light; }
@@ -53,7 +57,7 @@ dialog :focus-visible { outline-color: #964550; }
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, #2d000040, #2d000066 50%, #2d00004d);
+  background: linear-gradient(90deg, #ffffffcc, #ffffff88 38%, #ffffff08 66%);
 }
 .story-copy {
   z-index: 2;
@@ -63,17 +67,28 @@ dialog :focus-visible { outline-color: #964550; }
   height: 66%;
   transform: translate(-50%, -50%);
   text-align: center;
-  text-shadow: 0 2px 24px #2d0000cc;
+  text-shadow: 0 2px 20px #ffffffaa;
 }
 .chapter { align-items: center; justify-content: center; transition: opacity .7s, transform .9s; }
 .chapter .eyebrow { justify-content: center; }
-.chapter-description { color: #f0ded1; }
+.chapter-description { color: var(--muted); }
 .chapter .primary-button { text-shadow: none; }
 .story-bottom, .story-progress, .scene-loading, .retry-scene { z-index: 3; }
 .object-note { display: none; }
 .scene-loading { right: auto; left: 50%; bottom: 12%; transform: translateX(-50%); }
 .retry-scene { right: auto; left: 50%; bottom: 9%; transform: translateX(-50%); }
 .scene-poster { left: 10%; right: auto; top: 10%; width: 80%; height: 80%; }
+html:is([data-chapter="0"], [data-chapter="1"], [data-chapter="2"], [data-chapter="3"]) .story-copy {
+  left: 6%; width: 41%; transform: translateY(-50%); text-align: left;
+}
+html:is([data-chapter="0"], [data-chapter="1"], [data-chapter="2"], [data-chapter="3"]) .chapter {
+  align-items: flex-start;
+}
+html:is([data-chapter="0"], [data-chapter="1"], [data-chapter="2"], [data-chapter="3"]) .chapter h1,
+html:is([data-chapter="0"], [data-chapter="1"], [data-chapter="2"], [data-chapter="3"]) .chapter h2 {
+  font-size: clamp(45px, 5.6vw, 88px);
+}
+html:is([data-chapter="4"], [data-chapter="5"]) .scene-shade { background: #ffffff2e; }
 @media (max-width: 600px) {
   .story { height: 1600vh; }
   .story-copy { left: 50%; top: 48%; width: 90%; height: 65%; }
@@ -82,4 +97,13 @@ dialog :focus-visible { outline-color: #964550; }
   .scene-poster { left: 3%; top: 10%; width: 94%; height: 80%; }
   .scene-loading { bottom: 12%; }
   .retry-scene { bottom: 9%; }
+  html:is([data-chapter="0"], [data-chapter="1"], [data-chapter="2"], [data-chapter="3"]) .story-copy {
+    left: 6%; top: 42%; width: 57%; height: 65%;
+  }
+  html:is([data-chapter="0"], [data-chapter="1"], [data-chapter="2"], [data-chapter="3"]) .chapter h1,
+  html:is([data-chapter="0"], [data-chapter="1"], [data-chapter="2"], [data-chapter="3"]) .chapter h2 {
+    font-size: clamp(31px, 8.2vw, 49px); letter-spacing: -1.4px;
+  }
+  .chapter .eyebrow { letter-spacing: 1px; font-size: 7px; }
+  .scene-shade { background: linear-gradient(90deg, #ffffffcc, #ffffff66 48%, #ffffff08 78%); }
 }

@@ -25,13 +25,14 @@ The preview normally runs at **http://127.0.0.1:4173/**. Do not open `index.html
 ## Included
 
 - Six scroll chapters with clickable chapter navigation and a skip-to-shop link.
-- A centered 3D background behind the chapter text, gently dimmed over `#2D0000`.
+- A white background with burgundy type and cream packaging. The opening composition follows `sequence/`: copy on the left and the package pouring from the right.
 - Oversized, cropped models revealed by a scrolling camera: packaging top to bottom, mouth to falling beans, hopper to grinder outlet, machine lever to spout, then the cup's rim and body. Detail shots intentionally do not fit the whole model, including on mobile. Beans inherit the pouch's scale during release.
 - The final headline is the exception: the camera pulls back to fit the complete package and cup together, including the handle and saucer, with a margin. Framing uses their combined bounds and adjusts to the viewport aspect ratio.
 - A longer scroll sequence (1800vh desktop / 1600vh mobile) and 1.25-second scroll interpolation keep the copy and animation synchronized between scroll events. Hidden particle buffers are not updated.
 - All five custom 3D models, plus a shared portafilter for the handoff.
 - Openable packaging with two mouth morph targets and a separate closure pivot.
-- Lightweight instanced beans, hopper fill, grounds dosing, lever motion, vertical espresso streams and a rising coffee surface sized to the cup interior.
+- Instanced falling beans and a dense, growing hopper pile. The camera holds on the hopper through the last arrivals and a full-pile pause, then descends to the grounds outlet.
+- Flexible espresso streams with intermittent individual drops, expanding impact ripples and a gently moving coffee surface that settles after extraction.
 - Cream/burgundy styling and locally bundled Newsreader / Source Sans 3 fonts.
 - Four prototype coffees with size/grind selectors, size-dependent prices, and a browser-local shopping bag with quantity/remove controls.
 - A static narrative for reduced motion, and poster fallback/retry if 3D fails. No orders or payments are processed.
@@ -46,6 +47,7 @@ Everything required at runtime is served locally. Internet is needed only for a 
 | `src/styles.css` | Palette, typography, layout and responsive rules |
 | `src/story/evaluateStory.ts` | Scene boundaries and deterministic animation progress |
 | `src/story/cameraStory.ts` | Scroll-driven close-up camera targets and framing |
+| `src/story/liquidMotion.ts` | Flow pulses, individual drops and extraction envelope |
 | `src/scene/createScene.ts` | Models, lighting, camera framing and 3D choreography |
 | `src/main.ts` | ScrollTrigger, loading, reduced-motion switching, DOM chapter state |
 | `src/data/products.ts` | Prototype coffee names, prices, sizes and grind options |

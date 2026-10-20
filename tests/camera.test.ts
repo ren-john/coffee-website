@@ -40,6 +40,14 @@ describe('scroll-driven detail camera', () => {
     }
   });
 
+  it('holds the hopper shot through the final arrivals before descending to the outlet', () => {
+    const filling = cameraStory(.35, subjects);
+    expect(cameraStory(.385, subjects)).toEqual(filling);
+    expect(cameraStory(.435, subjects)).toEqual(filling);
+    expect(cameraStory(.485, subjects).y).toBeLessThan(filling.y);
+    expect(cameraStory(0, subjects, 16 / 9).x).toBeLessThan(subjects.bag.x);
+  });
+
   it.each([1920 / 945, 16 / 9, 768 / 1024, 390 / 844])('fits both final products with a margin at aspect %s', aspect => {
     const bounds = new Box3(new Vector3(-1.1, -.05, -.65), new Vector3(1.6, 2, 1.45));
     const finale = fitFinale(bounds, aspect);
