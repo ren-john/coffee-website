@@ -1,0 +1,7 @@
+{
+  "name": "coffee-grinder",
+  "units": "meters",
+  "vertices": 49279,
+  "triangles": 86764,
+  "notes": "Reference-guided commercial on-demand grinder based on CoffeeGrinder_1.jpg. Dark motor housing, stainless dial and controls, clear tapered hopper with low-poly beans, work bay, fork and portafilter. Approximate dimensions; not an engineering replica. Acrylic uses glTF transmission."
+}

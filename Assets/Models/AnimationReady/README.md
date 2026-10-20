@@ -1,0 +1,1 @@
+Animation derivatives: openable pouch with MouthOpen shape key and ClosurePivot; lightweight bean; centered transferable portafilter. Original model sources preserved. Runtime copies are in public/models.

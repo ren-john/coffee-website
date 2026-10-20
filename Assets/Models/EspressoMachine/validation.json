@@ -1,0 +1,11 @@
+{
+  "file": "espresso-machine.glb",
+  "bytes": 1317980,
+  "meshes": 50,
+  "triangles": 26936,
+  "materials": 6,
+  "embedded_images": 1,
+  "self_contained": true,
+  "finite_positions": true,
+  "valid_indices_and_normals": true
+}

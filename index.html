@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2D0000" />
+    <meta name="description" content="From freshly opened beans to your favorite cup. Discover the Mr. Bean morning ritual, made at home." />
+    <title>Mr. Bean — Your Favorite Brew, Made at Home.</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='20' fill='%23480817'/%3E%3Cellipse cx='20' cy='20' rx='8' ry='13' fill='none' stroke='%23fff9ef' stroke-width='2' transform='rotate(30 20 20)'/%3E%3Cpath d='M24 9C12 19 28 22 16 31' fill='none' stroke='%23fff9ef' stroke-width='2'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <a class="skip-link" href="#shop">Skip the story, shop coffee</a>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Mr. Bean home"><svg viewBox="0 0 32 40" aria-hidden="true"><ellipse cx="16" cy="20" rx="10" ry="16" transform="rotate(25 16 20)"/><path d="M22 6C8 18 25 23 10 34"/></svg><span>Mr. Bean<span class="brand-caption">COFFEE ROASTERS</span></span></a>
+      <nav aria-label="Main navigation"><a href="#story" class="nav-story">The ritual</a><a href="#shop">Our coffee <span aria-hidden="true">↗</span></a></nav>
+      <button class="bag-button" id="open-cart" aria-label="Open shopping bag" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7ZM8 8V6a4 4 0 0 1 8 0v2"/></svg><span class="bag-label">Your bag</span><span id="cart-count">0</span></button>
+    </header>
+    <main>
+      <section class="story" id="story" aria-label="From bean to cup">
+        <div class="story-stage">
+          <div class="stage-grain" aria-hidden="true"></div><div class="stage-halo" aria-hidden="true"></div>
+          <div class="watermark" aria-hidden="true">the daily ritual</div>
+          <div id="scene" aria-hidden="true"></div>
+          <img class="scene-poster" id="scene-poster" src="/images/packaging.png" alt="" aria-hidden="true" />
+          <div class="scene-shade" aria-hidden="true"></div>
+          <div class="scene-loading" id="scene-loading" role="status"><span class="loading-dot"></span><span id="loading-label">Preparing your morning…</span></div>
+          <button class="retry-scene" id="retry-scene" hidden>Retry 3D</button>
+          <div class="story-copy">
+            <article class="chapter is-active" data-chapter="0">
+              <p class="eyebrow"><span class="little-line"></span> THE EVERYDAY, EXTRAORDINARY</p>
+              <h1>Great mornings.<br>Start <em>here.</em></h1>
+              <p class="chapter-description">A bag of possibility.<br>A ritual that’s entirely yours.</p>
+              <button class="text-link begin-story" data-jump="0.16">Follow the bean <span aria-hidden="true">↓</span></button>
+            </article>
+            <article class="chapter" data-chapter="1" aria-hidden="true" inert>
+              <p class="eyebrow"><span class="little-line"></span> 01 / OPEN THE POSSIBILITY</p>
+              <h2>Good things<br>are <em>inside.</em></h2>
+              <p class="chapter-description">Break the seal. Breathe it in.<br>Your morning is about to begin.</p>
+            </article>
+            <article class="chapter" data-chapter="2" aria-hidden="true" inert>
+              <p class="eyebrow"><span class="little-line"></span> 02 / MAKE IT FRESH</p>
+              <h2>A fresh grind.<br>A fresh <em>start.</em></h2>
+              <p class="chapter-description">From whole bean to just-right grounds.<br>A little care makes all the difference.</p>
+            </article>
+            <article class="chapter" data-chapter="3" aria-hidden="true" inert>
+              <p class="eyebrow"><span class="little-line"></span> 03 / FIND YOUR MOMENT</p>
+              <h2>A little pressure.<br>Pure <em>possibility.</em></h2>
+              <p class="chapter-description">Lock it in. Take your time.<br>Let the good things come together.</p>
+            </article>
+            <article class="chapter" data-chapter="4" aria-hidden="true" inert>
+              <p class="eyebrow"><span class="little-line"></span> 04 / SAVOR THE POUR</p>
+              <h2>Worth every<br>little <em>drop.</em></h2>
+              <p class="chapter-description">Rich coffee. A warm cup.<br>A small moment, made just for you.</p>
+            </article>
+            <article class="chapter finale" data-chapter="5" aria-hidden="true" inert>
+              <p class="eyebrow"><span class="little-line"></span> YOUR MORNING, MADE BETTER</p>
+              <h2>Your Favorite Brew,<br>Made <em>at Home.</em></h2>
+              <p class="chapter-description">You bring the ritual.<br>We’ll bring the beans.</p>
+              <a class="primary-button" href="#shop">Shop Now <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+          <div class="object-note" id="object-note" aria-hidden="true"><span class="note-line"></span><span>THE SIGNATURE DAWN BLEND<br><b>Chocolate · Hazelnut · Candied orange</b></span></div>
+          <div class="story-bottom">
+            <span class="scroll-hint"><span class="scroll-track" aria-hidden="true"></span><span id="scroll-label">SCROLL TO SAVOR</span></span>
+            <nav class="chapters-nav" aria-label="Story scenes">
+              <button data-jump="0" class="is-current" aria-label="Packaging" aria-current="step"><span>01</span></button>
+              <button data-jump="0.22" aria-label="Opening the bag"><span>02</span></button>
+              <button data-jump="0.42" aria-label="Grinding the beans"><span>03</span></button>
+              <button data-jump="0.60" aria-label="Espresso machine"><span>04</span></button>
+              <button data-jump="0.78" aria-label="Pouring coffee"><span>05</span></button>
+              <button data-jump="0.97" aria-label="Your favorite brew"><span>06</span></button>
+            </nav>
+            <span class="story-index"><span id="chapter-index">01</span> <span>/ 06</span></span>
+          </div>
+          <div class="story-progress" aria-hidden="true"><span id="story-progress"></span></div>
+        </div>
+      </section>
+      <section class="reduced-story" id="reduced-story" hidden aria-label="The coffee ritual">
+        <p class="eyebrow">FROM BEAN TO CUP</p><h1>Your Favorite Brew,<br>Made <em>at Home.</em></h1><p>Open the bag. Grind it fresh. Brew it slowly. Make the moment yours.</p><a class="primary-button" href="#shop">Shop Now ↗</a>
+        <div class="ritual-stills"><figure><img src="/images/packaging.png" alt="Cream and burgundy Mr. Bean coffee packaging"/><figcaption>01 — Open the possibility</figcaption></figure><figure><img src="/images/grinder.png" alt="Coffee beans in the grinder"/><figcaption>02 — Grind it fresh</figcaption></figure><figure><img src="/images/espresso.png" alt="Walnut and charcoal manual espresso machine"/><figcaption>03 — Make it yours</figcaption></figure><figure><img src="/images/cup.png" alt="A filled ceramic coffee cup"/><figcaption>04 — Savor every drop</figcaption></figure></div>
+      </section>
+      <section class="shop-section" id="shop" aria-labelledby="shop-heading">
+        <div class="shop-intro"><div><p class="eyebrow"><span class="little-line"></span> MEET YOUR MORNING COMPANION</p><h2 id="shop-heading" tabindex="-1">Find your<br><em>daily ritual.</em></h2></div><p>From bright and floral to deep and comforting.<br>There’s a little something for every morning.</p></div>
+        <div class="product-grid" id="product-grid"></div>
+        <p class="catalog-note">A local storefront preview. Your bag stays in this browser; no orders or payments are processed.</p>
+      </section>
+      <section class="closing-note"><span class="eyebrow">LESS RUSH. MORE RITUAL.</span><p>Good coffee.<br><em>Your kind of morning.</em></p><a href="#story" class="text-link">Back to the beginning <span>↑</span></a></section>
+    </main>
+    <footer><a class="footer-brand" href="#">Mr. Bean</a><span>Crafted for your daily ritual.</span><span>© <span id="year"></span> Mr. Bean Coffee Roasters</span></footer>
+    <dialog id="cart-dialog" aria-labelledby="cart-heading"><div class="cart-header"><div><p class="eyebrow">YOUR DAILY RITUAL</p><h2 id="cart-heading">Your bag</h2></div><button class="close-cart" aria-label="Close shopping bag">×</button></div><div id="cart-items"></div><div class="cart-summary"><span>Subtotal</span><strong id="cart-total">$0.00</strong></div><p class="cart-note">This is a local preview. No payment or order will be placed.</p><button class="primary-button close-cart">Keep exploring <span>↗</span></button></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

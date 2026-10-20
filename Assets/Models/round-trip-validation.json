@@ -1,0 +1,57 @@
+[
+  {
+    "model": "coffee-packaging",
+    "imported_meshes": 3,
+    "dimensions_m": [
+      0.14499999582767487,
+      0.07593702524900436,
+      0.2400000006891787
+    ],
+    "round_trip": "passed",
+    "studio_excluded_from_glb": true
+  },
+  {
+    "model": "coffee-bean",
+    "imported_meshes": 1,
+    "dimensions_m": [
+      0.008004847913980484,
+      0.012400000356137753,
+      0.005299531141645275
+    ],
+    "round_trip": "passed",
+    "studio_excluded_from_glb": true
+  },
+  {
+    "model": "coffee-cup",
+    "imported_meshes": 7,
+    "dimensions_m": [
+      0.15000781416893005,
+      0.15000781416893005,
+      0.08815859101014212
+    ],
+    "round_trip": "passed",
+    "studio_excluded_from_glb": true
+  },
+  {
+    "model": "coffee-grinder",
+    "imported_meshes": 60,
+    "dimensions_m": [
+      0.20399999618530273,
+      0.3776380270719528,
+      0.5329999923706055
+    ],
+    "round_trip": "passed",
+    "studio_excluded_from_glb": true
+  },
+  {
+    "model": "espresso-machine",
+    "imported_meshes": 50,
+    "dimensions_m": [
+      0.22679903358221054,
+      0.46914662420749664,
+      0.6497137416154146
+    ],
+    "round_trip": "passed",
+    "studio_excluded_from_glb": true
+  }
+]

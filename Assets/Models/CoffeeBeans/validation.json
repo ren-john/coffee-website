@@ -1,0 +1,11 @@
+{
+  "file": "coffee-bean.glb",
+  "bytes": 3354724,
+  "meshes": 1,
+  "triangles": 20224,
+  "materials": 1,
+  "embedded_images": 3,
+  "self_contained": true,
+  "finite_positions": true,
+  "valid_indices_and_normals": true
+}

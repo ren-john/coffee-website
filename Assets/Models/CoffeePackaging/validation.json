@@ -1,0 +1,11 @@
+{
+  "file": "coffee-packaging.glb",
+  "bytes": 515884,
+  "meshes": 3,
+  "triangles": 19060,
+  "materials": 3,
+  "embedded_images": 1,
+  "self_contained": true,
+  "finite_positions": true,
+  "valid_indices_and_normals": true
+}

@@ -1,0 +1,11 @@
+{
+  "file": "coffee-grinder.glb",
+  "bytes": 1890344,
+  "meshes": 60,
+  "triangles": 86764,
+  "materials": 13,
+  "embedded_images": 0,
+  "self_contained": true,
+  "finite_positions": true,
+  "valid_indices_and_normals": true
+}

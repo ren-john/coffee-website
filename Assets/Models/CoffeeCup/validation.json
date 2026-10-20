@@ -1,0 +1,11 @@
+{
+  "file": "coffee-cup.glb",
+  "bytes": 1028788,
+  "meshes": 7,
+  "triangles": 56108,
+  "materials": 4,
+  "embedded_images": 0,
+  "self_contained": true,
+  "finite_positions": true,
+  "valid_indices_and_normals": true
+}
