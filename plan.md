@@ -407,3 +407,32 @@ The grinder is in place and its lid is clear before beans arrive. Travelling bea
 The coffee stream uses a segmented deforming mesh, varying width and small lateral motion. Extraction begins/ends with drops and periodically breaks into drops during the main pour. Drops accelerate toward the coffee surface, which has edge-damped waves and expanding ripples. Effects turn off when seeking outside extraction; reduced motion still uses the static story.
 
 Automated camera/state/liquid tests cover filling before grinding, the hopper camera hold, stream/drop transitions and shutoff, plus the previous model/finale contracts. Actual rendered visual review and real-device performance measurements remain pending under the documented browser preview restriction.
+
+## 21. Bean quality — October 23, 2026
+
+Restored close-up detail with 6,066 triangles and original full-resolution base color, roughness and normal maps. The 720-bean hopper now uses a 566-triangle sculpted LOD with matching UVs and shared textures instead of a generic procedural bean. The original Blender source remains intact; bean-quality.blend is the editable runtime derivative. The preparation script now retains this quality on regeneration. A Blender studio render was inspected; browser visual/performance review remains pending. The detailed GLB is approximately 3 MB, a deliberate increase for surface quality.
+
+
+## 22. Matte bean material correction
+
+The prior skin map remained glossy despite the increased geometry. New derivative textures darken the roast and raise roughness to 0.77–0.98; the source material uses IOR 1.38, reduced specular and no clearcoat. Runtime bean reflections are reduced independently of the other products. The pile now receives/casts shadows and varies bean size, height and roast tint. Original source textures remain intact. A Blender render was inspected and the embedded GLB roughness channel checked (196–249/255). Build and all 25 tests pass; the browser appearance remains unverified.
+
+
+## 23. Brown packaging palette
+
+The package artwork, paper folds and interior now use #733E24 brown. The front label, lower band and closure accent use deep burgundy #300916; brand and label text use cream for contrast. Both the editable source model and animated runtime GLB were regenerated, along with the fallback poster. Shop package illustrations match the brown body, and the Dawn Blend accent matches the new burgundy. The opening morph targets and closure/release nodes are preserved. Base texture colors were checked directly and the Blender preview inspected.
+
+## 24. Local ecommerce storefront — October 25, 2026
+
+Added persistent navigation for Coffee, Equipment, Brew guide and Orders. The separate `shop.html` entry point provides searchable/filterable collections, price sorting, seven product detail pages, variant selection, quantity controls, a shared browser-local bag, demo checkout, confirmations and local order history. Home Shop Now buttons and featured products link directly into the store. The 3D story and the #F2F0EF / brown / burgundy palette remain intact.
+
+The existing Vite/TypeScript stack now builds both entry points; the store does not load the Three.js scene. Shared catalog/cart modules validate persisted variants, compute rounded USD unit prices in cents, and apply sample standard/express delivery totals. Checkout uses native required/email validation and never saves contact/address data or requests card information. All prices, inventory and delivery choices are demo data. Real payment, stock reservation, tax calculation and fulfillment remain backend work for a future live store.
+
+Production build and 36 automated tests pass, including 11 new commerce tests. Browser visual/responsive and end-to-end interaction review remain pending under the existing preview access restriction. Manual review: browse both categories, search/filter/sort, configure two coffee variants, add equipment, adjust/remove items, refresh, complete demo checkout with sample details, and open Orders. Check navigation and forms at desktop and mobile widths.
+
+## 25. Supplied logo — October 26, 2026
+
+The supplied `Assets/MR BEAN - LOGO - 2026 (1).jpeg` now replaces the old header/footer emblem and shop pouch wordmark. A copy is served locally from `public/images/mr-bean-logo.jpeg`; the source image is unchanged. CSS frames the circular seal without its outer rectangular margin.
+
+The packaging generator maps the original JPEG onto a curved matte badge above the Dawn Blend label. Brown paper and deep burgundy accents remain. The badge follows the MouthOpen deformation in the animated derivative; both Blender sources, GLB exports and the fallback poster are regenerated. The Blender preview was inspected; browser visual review remains subject to the existing preview restriction.
+

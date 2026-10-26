@@ -1,1 +1,3 @@
-Animation derivatives: openable pouch with MouthOpen shape key and ClosurePivot; lightweight bean; centered transferable portafilter. Original model sources preserved. Runtime copies are in public/models.
+Animation derivatives: openable pouch with MouthOpen shape key and ClosurePivot; detailed bean plus a matching pile LOD; centered transferable portafilter. Original model sources preserved. Runtime copies are in public/models.
+
+Current beans: bean-quality.blend (editable close-up model), bean-quality-preview.png (Blender studio render), and bean-quality.json (export sizes). The runtime bean.glb has 6,066 triangles and embedded color/roughness/normal maps. bean-pile.glb has 566 triangles and shares the main bean material at runtime. Older bean-lightweight.blend is retained as a previous version, not used by the website.

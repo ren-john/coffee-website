@@ -4,11 +4,11 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from studio import *
 reset()
 OUT=Path(__file__).resolve().parents[1]/'CoffeePackaging'
-paper=material('Printed matte paper - HTML cream and burgundy','#fff9ef',.72)
+paper=material('Printed matte paper - brown #733E24 and deep burgundy','#733e24',.82)
 tex=paper.node_tree.nodes.new('ShaderNodeTexImage');tex.image=bpy.data.images.load(str(OUT/'textures/packaging_basecolor.png'))
 paper.node_tree.links.new(tex.outputs['Color'],paper.node_tree.nodes.get('Principled BSDF').inputs['Base Color'])
-ivory=material('Folded paper - cream #FFF9EF','#fff9ef',.74)
-wine=material('Seal - burgundy #651F2B','#651f2b',.68)
+ivory=material('Folded paper - brown #733E24','#733e24',.84)
+wine=material('Seal - deep burgundy #300916','#300916',.8)
 N,Z,H=128,72,.234
 def interp(t,points):
     for (a,x),(b,y) in zip(points,points[1:]):
@@ -46,9 +46,37 @@ for j in range(Z):
 fs.extend([tuple(reversed(range(N))),tuple(Z*N+i for i in range(N))])
 uv.extend([tuple((i/N,0) for i in reversed(range(N))),tuple((i/N,1) for i in range(N))])
 body=mesh('Pouch - folded gussets',vs,fs,paper,uv)
+# Use the original JPEG directly. A circular UV window keeps the seal intact,
+# including its cream border; no raster redraw or recoloring is involved.
+logo_mat=material('MR BEAN 2026 - supplied logo, matte print','#fff9ef',.88)
+logo_tex=logo_mat.node_tree.nodes.new('ShaderNodeTexImage')
+logo_tex.image=bpy.data.images.load(str(OUT.parents[1]/'MR BEAN - LOGO - 2026 (1).jpeg'))
+logo_mat.node_tree.links.new(logo_tex.outputs['Color'],logo_mat.node_tree.nodes.get('Principled BSDF').inputs['Base Color'])
+def logo_point(a,b):
+    x=.029*a; t=(.182+.029*b-.003)/H
+    lo,hi=.25,.75
+    for _ in range(28):
+        u=(lo+hi)/2
+        if surface(u,t)[0]<x:lo=u
+        else:hi=u
+    px,py,pz=surface((lo+hi)/2,t)
+    return (px,py-.00012,pz)
+def logo_uv(a,b):return ((586+426*a)/1149,1-(455-426*b)/912)
+lv=[logo_point(0,0)];luv=[logo_uv(0,0)];lf=[]
+rings,segments=12,96
+for r in range(1,rings+1):
+    for i in range(segments):
+        angle=2*math.pi*i/segments;a=r/rings*math.cos(angle);b=r/rings*math.sin(angle)
+        lv.append(logo_point(a,b));luv.append(logo_uv(a,b))
+for i in range(segments):lf.append((0,1+i,1+(i+1)%segments))
+for r in range(1,rings):
+    lower=1+(r-1)*segments;upper=1+r*segments
+    for i in range(segments):
+        k=(i+1)%segments;lf.append((lower+i,upper+i,upper+k,lower+k))
+logo=mesh('MR BEAN 2026 logo',lv,lf,logo_mat,[tuple(luv[i] for i in f) for f in lf])
 # A folded-over top with a thin darker underside, as in the paper bag references.
 fold=bevel_box('Rolled top closure',(0,-.001,.237),(.145,.012,.012),ivory,.0025)
 lip=bevel_box('Burgundy closure edge',(0,-.0068,.2325),(.14,.0015,.002),wine,.0005)
-objects=[body,fold,lip]
+objects=[body,fold,lip,logo]
 finish('coffee-packaging',OUT,objects,(0,0,.122),(.32,-.64,.32),.323,
-       'Original Mr. Bean artwork. Pouch shape inspired by CoffeePackaging_1-3.jpg; HTML palette #FFF9EF, #480817, #651F2B. Approximately 150 x 76 x 243 mm. Geometry and artwork are authored, not photogrammetric reconstruction.')
+       'Supplied MR BEAN 2026 logo mapped to a curved matte badge. Pouch shape inspired by CoffeePackaging_1-3.jpg; brown paper #733E24, deep burgundy #300916, cream lettering #FFF9EF. Approximately 150 x 76 x 243 mm. Authored geometry, not photogrammetric reconstruction.')

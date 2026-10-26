@@ -3,7 +3,8 @@ import { describe, it, expect } from 'vitest';
 
 type GLB = {
   nodes: { name?: string; mesh?: number }[];
-  meshes: { extras?: { targetNames?: string[] }; primitives: { indices: number; targets?: unknown[] }[] }[];
+  meshes: { extras?: { targetNames?: string[] }; primitives: { indices: number; attributes: Record<string, number>; targets?: unknown[] }[] }[];
+  materials?: { normalTexture?: unknown; pbrMetallicRoughness?: { baseColorTexture?: unknown; metallicRoughnessTexture?: unknown } }[];
   accessors: { count: number }[];
   buffers: { uri?: string }[];
   images?: { uri?: string; bufferView?: number }[];
@@ -18,8 +19,8 @@ function read(name: string): GLB {
 const names = (asset: GLB) => asset.nodes.map(n => n.name);
 
 describe('runtime model contracts', () => {
-  it('ships all six assets without remote resource dependencies', () => {
-    for (const name of ['packaging', 'bean', 'grinder', 'espresso', 'cup', 'portafilter']) {
+  it('ships all runtime assets without remote resource dependencies', () => {
+    for (const name of ['packaging', 'bean', 'bean-pile', 'grinder', 'espresso', 'cup', 'portafilter']) {
       const asset = read(name);
       expect(asset.buffers.every(b => !b.uri)).toBe(true);
       expect((asset.images ?? []).every(i => !i.uri && i.bufferView !== undefined)).toBe(true);
@@ -30,14 +31,26 @@ describe('runtime model contracts', () => {
     expect(names(asset)).toContain('ClosurePivot');
     expect(names(asset)).toContain('BeanRelease');
     const mouths = asset.meshes.filter(m => m.extras?.targetNames?.includes('MouthOpen'));
-    expect(mouths).toHaveLength(2);
+    expect(mouths).toHaveLength(3);
+    expect(names(asset)).toContain('MR BEAN 2026 logo');
     mouths.forEach(m => expect(m.primitives[0].targets?.length).toBeGreaterThan(0));
   });
-  it('keeps the instanced bean lightweight', () => {
+  it('preserves close-up bean detail and all surface maps within a bounded mesh budget', () => {
     const asset = read('bean');
     const triangles = asset.meshes.flatMap(m => m.primitives).reduce((n, p) => n + asset.accessors[p.indices].count / 3, 0);
-    expect(triangles).toBeLessThan(1500);
-    expect(triangles).toBeGreaterThan(100);
+    expect(triangles).toBeLessThan(8000);
+    expect(triangles).toBeGreaterThan(5000);
+    expect(asset.materials?.[0].normalTexture).toBeDefined();
+    expect(asset.materials?.[0].pbrMetallicRoughness?.baseColorTexture).toBeDefined();
+    expect(asset.materials?.[0].pbrMetallicRoughness?.metallicRoughnessTexture).toBeDefined();
+  });
+  it('keeps a UV-mapped bean LOD for the dense hopper pile', () => {
+    const asset = read('bean-pile');
+    const primitives = asset.meshes.flatMap(m => m.primitives);
+    const triangles = primitives.reduce((n, p) => n + asset.accessors[p.indices].count / 3, 0);
+    expect(triangles).toBeGreaterThan(400);
+    expect(triangles).toBeLessThan(800);
+    for (const primitive of primitives) expect(primitive.attributes.TEXCOORD_0).toBeDefined();
   });
   it('contains the movable grinder lid, fill mesh and transferable basket', () => {
     expect(names(read('grinder'))).toEqual(expect.arrayContaining(['Hopper lid', 'Beans inside hopper']));

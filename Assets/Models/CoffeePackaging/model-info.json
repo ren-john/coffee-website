@@ -1,7 +1,7 @@
 {
   "name": "coffee-packaging",
   "units": "meters",
-  "vertices": 9536,
-  "triangles": 19060,
-  "notes": "Original Mr. Bean artwork. Pouch shape inspired by CoffeePackaging_1-3.jpg; HTML palette #FFF9EF, #480817, #651F2B. Approximately 150 x 76 x 243 mm. Geometry and artwork are authored, not photogrammetric reconstruction."
+  "vertices": 10689,
+  "triangles": 21268,
+  "notes": "Original Mr. Bean artwork. Pouch shape inspired by CoffeePackaging_1-3.jpg; brown paper #733E24, deep burgundy #300916, cream lettering #FFF9EF. Approximately 150 x 76 x 243 mm. Geometry and artwork are authored, not photogrammetric reconstruction."
 }

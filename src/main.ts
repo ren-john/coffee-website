@@ -31,7 +31,6 @@ function update(progress: number) {
     current = chapter;
     chapters.forEach((element, i) => { element.classList.toggle('is-active', i === chapter); element.setAttribute('aria-hidden', String(i !== chapter)); element.inert = i !== chapter; });
     navButtons.forEach((button, i) => { button.classList.toggle('is-current', i === chapter); if (i === chapter) button.setAttribute('aria-current', 'step'); else button.removeAttribute('aria-current'); });
-    document.querySelector('#chapter-index')!.textContent = String(chapter + 1).padStart(2, '0');
     document.querySelector('#scroll-label')!.textContent = chapter === 5 ? 'MAKE IT YOUR MORNING' : 'SCROLL TO SAVOR';
   }
   if (!ready && poster.getAttribute('src') !== posters[chapter]) poster.src = posters[chapter];
@@ -46,7 +45,7 @@ function failure(error: unknown) {
   console.warn('3D unavailable; using local scene posters.', error);
   engine?.dispose(); engine = undefined; ready = false; scene.dataset.ready = 'fallback';
   poster.classList.remove('is-hidden'); loading.classList.remove('is-hidden');
-  document.querySelector('#loading-label')!.textContent = 'The ritual, in stills. Scroll to explore.';
+  document.querySelector('#loading-label')!.textContent = 'From bean to cup, in stills. Scroll to explore.';
   loading.querySelector('.loading-dot')?.classList.remove('loading-dot'); retry.hidden = false; update(currentProgress);
 }
 async function startScene() {

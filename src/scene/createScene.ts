@@ -6,15 +6,15 @@ import { liquidMotion, dropFlight } from '../story/liquidMotion';
 import { cameraStory } from '../story/cameraStory';
 import { fitFinale } from './fitFinale';
 
-type ModelName = 'packaging' | 'bean' | 'grinder' | 'espresso' | 'cup' | 'portafilter';
+type ModelName = 'packaging' | 'bean' | 'bean-pile' | 'grinder' | 'espresso' | 'cup' | 'portafilter';
 type Assets = Record<ModelName, THREE.Group>;
-const names: ModelName[] = ['packaging', 'bean', 'grinder', 'espresso', 'cup', 'portafilter'];
+const names: ModelName[] = ['packaging', 'bean', 'bean-pile', 'grinder', 'espresso', 'cup', 'portafilter'];
 function named(root: THREE.Object3D, name: string) { let found: THREE.Object3D | undefined; root.traverse(o => { if (o.name === name || o.name === name.replaceAll(' ', '_')) found = o; }); return found; }
 function contains(root: THREE.Object3D, value: string) { const list: THREE.Object3D[] = []; root.traverse(o => { if (o.name.toLowerCase().replaceAll('_', ' ').includes(value.toLowerCase())) list.push(o); }); return list; }
 
 export async function createScene(container: HTMLElement, onLoad: (loaded: number) => void, onFailure: (error: unknown) => void) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setClearColor(0xffffff, 0); renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.setClearColor(0xf2f0ef, 0); renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.35;
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.replaceChildren(renderer.domElement);
@@ -37,6 +37,20 @@ export async function createScene(container: HTMLElement, onLoad: (loaded: numbe
       onLoad(++loaded / names.length);
     }));
   } catch (error) { renderer.dispose(); environment.dispose(); pmrem.dispose(); container.replaceChildren(); throw error; }
+  // Preserve the supplied seal's burgundy instead of brightening its ink with
+  // the studio lights and ACES exposure. Its geometry still follows the pouch.
+  const logo = named(assets.packaging, 'MR BEAN 2026 logo');
+  if (logo instanceof THREE.Mesh && logo.material instanceof THREE.MeshStandardMaterial) {
+    const printed = logo.material;
+    logo.material = new THREE.MeshBasicMaterial({
+      map: printed.map,
+      color: 0xffffff,
+      side: printed.side,
+      toneMapped: false,
+    });
+    logo.material.name = 'MR BEAN logo - original burgundy';
+    printed.dispose();
+  }
   const wrap = (name: ModelName, scale: number) => { const group = new THREE.Group(); group.name = name + '-stage'; group.add(assets[name]); group.scale.setScalar(scale); scene.add(group); return group; };
   const bag = wrap('packaging', 7.8); assets.packaging.position.y = -.12;
   const grinder = wrap('grinder', 4); const machine = wrap('espresso', 4); const cup = wrap('cup', 5); const filter = wrap('portafilter', 4);
@@ -94,20 +108,38 @@ export async function createScene(container: HTMLElement, onLoad: (loaded: numbe
   beanSource.geometry.center(); beanSource.geometry.computeBoundingBox();
   const beanSize = beanSource.geometry.boundingBox!.getSize(new THREE.Vector3());
   const beanDiameter = Math.max(beanSize.x, beanSize.y, beanSize.z);
+  const beanMaterials = Array.isArray(beanSource.material) ? beanSource.material : [beanSource.material];
+  for (const material of beanMaterials) {
+    if (material instanceof THREE.MeshStandardMaterial) {
+      material.envMapIntensity = .28;
+      material.metalness = 0;
+      if (material instanceof THREE.MeshPhysicalMaterial) {
+        material.clearcoat = 0;
+        material.specularIntensity = .18;
+      }
+      for (const texture of [material.map, material.normalMap, material.roughnessMap]) {
+        if (texture) texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+      }
+    }
+  }
   const beanCount = matchMedia('(max-width:600px)').matches ? 32 : 56;
   const beans = new THREE.InstancedMesh(beanSource.geometry, beanSource.material, beanCount); beans.frustumCulled = false; scene.add(beans);
-  // A dense pile uses a small creased-bean mesh so filling does not multiply
-  // the detailed airborne geometry hundreds of times.
-  const pileGeometry = new THREE.SphereGeometry(1, 10, 6).scale(.36, .5, .26);
-  const pileVertices = pileGeometry.getAttribute('position');
-  for (let i = 0; i < pileVertices.count; i++) {
-    const x = pileVertices.getX(i), z = pileVertices.getZ(i);
-    if (z > 0) pileVertices.setZ(i, z - .09 * Math.exp(-((x / .075) ** 2)) * (z / .26));
-  }
-  pileGeometry.computeVertexNormals();
+  // Matching sculpted LOD shares the close-up material, including skin detail.
+  let pileSource: THREE.Mesh | undefined;
+  assets['bean-pile'].traverse(o => { if (o instanceof THREE.Mesh) pileSource = o; });
+  if (!pileSource) throw new Error('Pile bean geometry missing');
+  const pileGeometry = pileSource.geometry;
+  pileGeometry.center(); pileGeometry.computeBoundingBox();
+  const pileSize = pileGeometry.boundingBox!.getSize(new THREE.Vector3());
+  const pileUnitScale = 1 / Math.max(pileSize.x, pileSize.y, pileSize.z);
+  pileGeometry.scale(pileUnitScale, pileUnitScale, pileUnitScale);
   const pileCount = 720;
-  const pile = new THREE.InstancedMesh(pileGeometry, new THREE.MeshStandardMaterial({ color: 0x57321f, roughness: .62 }), pileCount);
-  for (let i = 0; i < pileCount; i++) pile.setColorAt(i, new THREE.Color().setScalar(.72 + (i % 7) * .065));
+  const pile = new THREE.InstancedMesh(pileGeometry, beanSource.material, pileCount);
+  for (let i = 0; i < pileCount; i++) {
+    const roast = ((i * 73) % 101) / 100;
+    pile.setColorAt(i, new THREE.Color().setRGB(.62 + roast * .38, .57 + roast * .40, .53 + roast * .42));
+  }
+  pile.castShadow = true; pile.receiveShadow = true;
   pile.frustumCulled = false; grinder.add(pile);
   const grounds = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(.006, 0), new THREE.MeshStandardMaterial({ color: 0x372014, roughness: 1 }), 50); grounds.frustumCulled = false; scene.add(grounds);
   const dummy = new THREE.Object3D(); const v1 = new THREE.Vector3(); const v2 = new THREE.Vector3(); const v3 = new THREE.Vector3(); const up = new THREE.Vector3(0, 1, 0);
@@ -147,9 +179,11 @@ export async function createScene(container: HTMLElement, onLoad: (loaded: numbe
         const radius = lerp(.015, .070, layer) * Math.sqrt(((i * 37) % 101 + .5) / 101);
         const angle = i * 2.39996;
         const settled = smooth(clamp(s.hopperFill * pileCount - i), 0, 1);
-        dummy.position.set(Math.cos(angle) * radius, .351 + layer * .12 + (1 - settled) * .009, Math.sin(angle) * radius);
+        const variation = ((i * 61) % 97) / 96;
+        dummy.position.set(Math.cos(angle) * radius, .351 + layer * .12 + (variation - .5) * .004 + (1 - settled) * .009, Math.sin(angle) * radius);
         dummy.rotation.set(i * .71, angle, i * 1.13 + (1 - settled) * .4);
-        dummy.scale.setScalar(.018 * settled);
+        const size = .018 * settled;
+        dummy.scale.set(size * (.88 + variation * .16), size * (.94 + variation * .12), size * (.9 + variation * .12));
         dummy.updateMatrix(); pile.setMatrixAt(i, dummy.matrix);
       }
       pile.instanceMatrix.needsUpdate = true;
