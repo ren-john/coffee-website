@@ -135,6 +135,17 @@ function guide() {
     ['03', 'French press', '30g coffee · 500g water', 'Use a coarse grind. Add water, stir gently and steep for around four minutes before pressing slowly. Decant into your cup.'],
   ].map(([n, title, ratio, copy]) => `<article class="guide-card"><span class="guide-number">${n}</span><h2>${title}</h2><p class="eyebrow">${ratio}</p><p>${copy}</p><a class="text-link" href="#/coffee">Find your coffee ↗</a></article>`).join('')}</div><div class="guide-banner"><h2>The tools behind the ritual.</h2><a class="primary-button" href="#/equipment">Browse equipment ↗</a></div>`;
 }
+function about() {
+  const members = [
+    { name: 'John Beneddick Bernal', role: 'Frontend', initials: 'JB', description: 'John brings the website to life with responsive interfaces that make every visit feel effortless.' },
+    { name: 'Oliver Dela Cruz Dacera', role: 'Design', initials: 'OD', description: 'Oliver shapes the visual identity with thoughtful layouts and details that capture the warmth of coffee.' },
+    { name: 'Guian Carlo Grandea', role: 'Frontend', initials: 'GG', description: 'Guian builds intuitive interactions that help visitors explore the site with ease.' },
+    { name: 'Nancie Blaire Naniong', role: 'Design', initials: 'NN', description: 'Nancie blends color, typography, and creativity to give the website its welcoming character.' },
+    { name: 'Renmar John Morales', role: 'Backend', initials: 'RM', description: 'Renmar develops the logic behind the scenes to support the website’s functionality.' },
+  ];
+  root.innerHTML = heading('THE PEOPLE BEHIND MR. BEAN', 'About <em>Us.</em>', 'Five people, one shared vision: bringing the warmth of a coffee ritual to the web.')
+    + `<section class="team-section" aria-labelledby="team-heading"><div class="team-intro"><h2 id="team-heading">Meet the team.</h2><p>A blend of design, frontend, and backend.</p></div><div class="team-grid">${members.map(member => `<article class="team-card"><span class="team-monogram" aria-hidden="true">${member.initials}</span><p class="team-role">${member.role}</p><h3>${member.name}</h3><p class="team-description">${member.description}</p></article>`).join('')}</div></section>`;
+}
 function render() {
   if (location.hash === '#store-content') { root.focus(); return; }
   const { parts, params } = readRoute(); const [page, id] = parts;
@@ -150,6 +161,7 @@ function render() {
   else if (page === 'orders') orderHistory();
   else if (page === 'order') orderPage(id);
   else if (page === 'guide') guide();
+  else if (page === 'about') about();
   else root.innerHTML = heading('A DIFFERENT PATH', 'Page not found.', '') + empty('Let’s find your coffee.', 'The link may have changed. The collection is right here.');
   document.title = `${root.querySelector('h1')?.textContent ?? 'Shop'} — Mr. Bean`;
   window.scrollTo({ top: 0, behavior: 'instant' }); root.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true });
