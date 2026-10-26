@@ -1,0 +1,11 @@
+{
+  "file": "packaging.glb",
+  "bytes": 1762972,
+  "meshes": 5,
+  "triangles": 39700,
+  "materials": 5,
+  "embedded_images": 2,
+  "self_contained": true,
+  "finite_positions": true,
+  "valid_indices_and_normals": true
+}

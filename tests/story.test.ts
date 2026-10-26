@@ -8,8 +8,8 @@ describe('reversible scroll story', () => {
     expect(last.mouth).toBe(0); expect(last.cupFill).toBe(1); expect(last.stream).toBe(0); expect(last.chapter).toBe(5);
   });
   it('fills grounds before the portafilter transfer and positions the cup before pouring', () => {
-    expect(evaluateStory(.49).groundsFill).toBe(1);
-    expect(evaluateStory(.49).transfer).toBe(0);
+    expect(evaluateStory(.525).groundsFill).toBe(1);
+    expect(evaluateStory(.525).transfer).toBe(0);
     expect(evaluateStory(.705).cupArrival).toBe(1);
     expect(evaluateStory(.70).stream).toBe(0);
   });
@@ -25,6 +25,14 @@ describe('reversible scroll story', () => {
   });
   it('hides all travelling beans after the hopper has filled', () => {
     for (let i = 0; i < 56; i++) expect(beanFlight(.41, i, 56).visible).toBe(false);
+  });
+  it('finishes filling and holds the full hopper before grinding begins', () => {
+    for (const p of [.39, .41, .435, .455]) {
+      expect(evaluateStory(p).hopperFill).toBe(1);
+      expect(evaluateStory(p).groundsFill).toBe(0);
+      for (let i = 0; i < 56; i++) expect(beanFlight(p, i, 56).visible).toBe(false);
+    }
+    expect(evaluateStory(.48).groundsFill).toBeGreaterThan(0);
   });
   it('keeps the rising coffee inside the tapered cup', () => {
     let previous = cupSurface(0);

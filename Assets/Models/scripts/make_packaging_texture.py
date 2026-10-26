@@ -5,30 +5,26 @@ import random, math
 OUT = Path(__file__).resolve().parents[1] / 'CoffeePackaging' / 'textures'
 OUT.mkdir(parents=True, exist_ok=True)
 S = 2048
-cream, wine, pale = '#fff9ef', '#480817', '#e8cbb2'
-im = Image.new('RGB', (S, S), cream)
+cream, wine, pale = '#fff9ef', '#300916', '#e8cbb2'
+paper = '#733E24'
+im = Image.new('RGB', (S, S), paper)
 d = ImageDraw.Draw(im)
 def font(size, serif=False, italic=False):
     name = 'georgiai.ttf' if italic else ('georgia.ttf' if serif else 'arial.ttf')
     return ImageFont.truetype('C:/Windows/Fonts/' + name, size)
-def text(y, value, size, fill=wine, serif=False, italic=False, x=1024):
+def text(y, value, size, fill=cream, serif=False, italic=False, x=1024):
     d.text((x,y), value, font=font(size,serif,italic), anchor='mm', fill=fill)
-def tracked(y, value, size=19, gap=5, fill=wine, x=1024):
+def tracked(y, value, size=19, gap=5, fill=cream, x=1024):
     f=font(size)
     widths=[d.textlength(c,font=f) for c in value]
     left=x-(sum(widths)+gap*(len(value)-1))/2
     for c,w in zip(value,widths):
         d.text((left,y),c,font=f,fill=fill,anchor='lm');left+=w+gap
 # Wraparound lower block, deliberately separate from the front label.
-d.rectangle((0,1710,S,S),fill='#651f2b')
+d.rectangle((0,1710,S,S),fill=wine)
 d.line((0,1710,S,1710),fill=pale,width=5)
-# Original emblem and brand typography.
-d.ellipse((981,305,1067,423),outline=wine,width=4)
-d.arc((976,302,1039,427),-75,80,fill=wine,width=4)
-text(492,'Mr. Bean',83,serif=True)
-tracked(563,'COFFEE ROASTERS',18,4)
-d.line((838,623,1210,623),fill='#c8ab93',width=2)
-text(690,'A slower morning.',31,serif=True,italic=True)
+# The supplied logo is mapped onto a conforming badge mesh by build_packaging.py.
+# Leave this upper area clear instead of printing the old emblem beneath it.
 # Front panel uses generous margins to survive pouch curvature.
 d.rounded_rectangle((744,801,1304,1610),radius=4,fill=wine)
 d.rectangle((769,826,1279,1585),outline='#aa7a63',width=2)
